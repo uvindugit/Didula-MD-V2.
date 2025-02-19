@@ -57,17 +57,17 @@ const msgRetryCounterCache = new NodeCache()
 
 const ownerNumber = ['94741671668']
 //===================SESSION============================
-  const SESSION_DIR = `./${config.SESSION_NAME}`;
+  const SESSION_DIR = `./session`;
     if (!fs.existsSync(SESSION_DIR)) {
         fs.mkdirSync(SESSION_DIR);
       }
-if (!fs.existsSync(__dirname + `/${config.SESSION_NAME}/creds.json`)) {
+if (!fs.existsSync(__dirname + `/session/creds.json`)) {
     if (!config.SESSION_ID) return console.log("Please Add SESSION_ID ➾")
       const sessdata = config.SESSION_ID.replace("𝙰𝚂𝙸𝚃𝙷𝙰-𝙼𝙳=", "")
       const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
       filer.download((err, data) => {
         if (err) throw err
-        fs.writeFile(__dirname + `/${config.SESSION_NAME}/creds.json`, data, () => {
+        fs.writeFile(__dirname + `/session/creds.json`, data, () => {
           console.log("Session download completed !!")
         })
       })
@@ -97,7 +97,7 @@ async function connectToWA() {
     const {
         state,
         saveCreds
-    } = await useMultiFileAuthState(__dirname + `/${config.SESSION_NAME}/`)
+    } = await useMultiFileAuthState(__dirname + `/session/`)
     const conn = makeWASocket({
         logger: P({
             level: "fatal"
