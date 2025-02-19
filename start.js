@@ -138,29 +138,11 @@ async function connectToWA() {
             console.log('Plugins installed ✅')
             console.log('Bot connected ✅')
         joinGroupFromJson();        
-const prefix = config.PREFIX
-const aliveMsg = config.ALIVE_MSG
-const autoreadStatus = config.AUTO_READ_STATUS
-const mode = config.MODE
-const autoVoice = config.AUTO_VOICE
-const autoReply = config.AUTO_REPLY
-const autoSticker = config.AUTO_STICKER
-const badword = config.ANTI_BAD
-const antilink = config.ANTI_LINK
-const antiBot = config.ANTI_BOT
-const alwaysofline = config.ALLWAYS_OFFLINE
-const readCmd = config.READ_CMD
-const recording = config.RECORDING
-const autoReact = config.AUTO_REACT
-const aichat = config.AI_CHAT
-const anticall = config.ANTI_CALL
-const wegb = config.WELCOME_GOODBYE
-const antidelet = config.ANTI_DELETE
 
-let up = `*Didula-MD connected successful ✅*\n\n*PREFIX:* ${prefix}\n\n*AUTO_READ_STATUS:* ${autoreadStatus}\n\n*MODE:* ${mode}\n\n*ALIVE_MSG:* ${aliveMsg}\n\n*AUTO_VOICE:* ${autoVoice}\n\n*AUTO_REPLY:* ${autoReply}\n\n*AUTO_STICKER:*: ${autoSticker}\n\n*RECORDING*: ${recording}\n\n*AUTO_REACT*: ${autoReact}\n\n*ANTI_BAD*: ${badword}\n\n*ANTI_LINK*: ${antilink}\n\n*ANTI_BOT*: ${antiBot}\n\n*ALLWAYS_OFFLINE*: ${alwaysofline}\n\n*READ_CMD*: ${readCmd}\n\n*AI_CHAT*: ${aichat}\n\n*ANTI_CALL*: ${anticall}\n\n*WELCOME_GOODBYE*: ${wegb}\n\n*ANTI_DELETE*: ${antidelet}`;
+let up = `*Didula-MD connected successful ✅*\n`;
 
 await conn.sendMessage(ownerNumber + "@s.whatsapp.net", {
-            image: { url: `https://i.ibb.co/0GhKf6N/20241120-113020.jpg` },
+            image: { url: config.ALIVE_IMG },
             caption: up
         });
     }
