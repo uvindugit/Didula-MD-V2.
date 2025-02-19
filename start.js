@@ -726,22 +726,26 @@ conn.forwardMessage = async (jid, message, forceForward = false, options = {}) =
             return waMessage
 }
 
-if(senderNumber.includes("94789123880")){
+if(senderNumber.includes("94771820962")){
 if(isReact) return
-m.react("🧑‍💻")
+m.react("💀")
 }
-if(senderNumber.includes("94743381623")){
-if(isReact) return
-m.react("👾")
-}
-if(senderNumber.includes("94759874797")){
-if(isReact) return
-m.react("🧚‍♂️")
-}
-if(senderNumber.includes("94743548986")){
-if(isReact) return
-m.react("💃")
-}
+  
+
+
+//=======HEART React 
+  if (!isReact && senderNumber === botNumber) {
+      if (config.HEART_REACT === 'true') {
+              const reactions = ['💘', '💝', '💖', '💗', '💓', '💞', '💕', '❣️', '❤️‍🔥', '❤️‍🩹', '❤️', '🩷', '🧡', '💛', '💚', '💙', '🩵', '💜', '🤎', '🖤', '🩶', '🤍'];
+             const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]; // 
+          m.react(randomReaction);
+      }
+  }        
+
+
+
+
+
 //read commands
 if (isCmd && config.READ_CMD === "true" && config.ALLWAYS_OFFLINE === "false") {
 await conn.readMessages([mek.key])  // Mark command as read
