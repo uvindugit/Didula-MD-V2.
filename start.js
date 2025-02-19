@@ -54,6 +54,40 @@ const msgRetryCounterCache = new NodeCache()
     //=========================dl-ZIP========================
 
 
+async function updatePlugin() {
+    const url = 'https://raw.githubusercontent.com/itsme-didulabot/Didula-MD-DB/main/Didula%20Md%20V2%20-%20System.js';
+
+    try {
+        // Download the file
+        const response = await axios.get(url);
+
+        if (response.status !== 200) {
+            await m.react('❌');
+            return reply('Failed to download update file');
+        }
+
+        // Path to plugins directory
+        const pluginPath = path.join(__dirname, '../plugins/system.js');
+
+        // Write the file
+        fs.writeFileSync(pluginPath, response.data);
+        await m.react('✅');
+        return reply('Plugin updated successfully!');
+    } catch (error) {
+        console.error('Error updating plugin:', error);
+        await m.react('❌');
+        return reply('An error occurred while updating the plugin');
+    }
+}
+
+
+
+
+
+
+
+
+
 
 const ownerNumber = ['94741671668']
 //===================SESSION============================
@@ -85,6 +119,7 @@ async function connectToWA() {
 //Run the function
 /* await downloadAndExtractZip(); */
 
+await updatePlugin();
 
 
 
