@@ -7,6 +7,30 @@ const axios = require('axios');
 const { fetchJson, getBuffer } = require('../lib/functions');
 
 
+
+
+cmd({
+    pattern: "ai",
+    desc: "ai chat",
+    category: "main",
+    react: "🤖",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+let data = await fetchJson(`https://chatgptforprabath-md.vercel.app/api/gptv1?q=${q}`)
+return reply(`${data.data}\n\n> 🔱 𝐏𝐫𝐨𝐣𝐞𝐜𝐭𝐬 𝐎𝐟 𝐃𝐢𝐝𝐮𝐥𝐚 𝐑𝐚𝐬𝐡𝐦𝐢𝐤𝐚 💀🙌`)
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
+    
+
+
+
+
+
 cmd({
     pattern: "dog",
     desc: "Fetch a random dog image.",
