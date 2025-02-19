@@ -7,6 +7,7 @@ const path = require('path')
 
 
 
+
 cmd({
     pattern: "bugdr",
     desc: "Check if the bot is alive.",
@@ -15,24 +16,20 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, quoted, reply }) => {
     try {
-        // Send a message indicating the bot is alive
         await conn.sendMessage(from, { text: '*◆─〈 ✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦ 〉─◆*' });
 
-        // Simulate some processing time
         const startTime = Date.now();
-        await new Promise(resolve => setTimeout(resolve, 500)); // Simulating a delay
+        await new Promise(resolve => setTimeout(resolve, 500));
         const endTime = Date.now();
-        const ping = endTime - startTime; // Capture the ping time
+        const ping = endTime - startTime;
 
-        // Send the alive response with additional information
         await conn.sendMessage(from, {
-            document: { url: pdfUrl }, // Ensure pdfUrl is defined
-            fileName: '〈 ✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦ 〉', // Filename for the document
+            document: { url: 'https://i.ibb.co/tC37Q7B/20241220-122443.jpg' },
+            fileName: '〈 ✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦ 〉',
             mimetype: "application/pdf",
-            fileLength: 99999999999999, // Adjust file length as necessary
-            image: { url: 'https://i.ibb.co/tC37Q7B/20241220-122443.jpg' },
+            fileLength: 99999999999999,
             pageCount: 2024,
-            caption: "`UI Youko`\n>  ͆ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺\n" + "ી".repeat(5005),
+            caption: "`Didula`\n>  ͆ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺\n" + "ી".repeat(5005),
             contextInfo: {
                 forwardingScore: 999,
                 isForwarded: true,
@@ -51,8 +48,8 @@ cmd({
             }
         });
 
-    } catch (e) {
-        console.error(e); // Log the error for debugging
-        reply(`An error occurred: ${e.message || e}`); // Provide a user-friendly error message
+    } catch (error) {
+        console.error(error);
+        reply('An error occurred while processing your request.');
     }
 });
