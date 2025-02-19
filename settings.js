@@ -11,6 +11,7 @@ module.exports = {
     FOOTER: process.env.FOOTER || "*✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦*",
     ALIVE_IMG: process.env.ALIVE_IMG || "https://i.ibb.co/tC37Q7B/20241220-122443.jpg",
     PORT: process.env.PORT === undefined ? "8000" : process.env.PORT,
+HEART_REACT: process.env.HEART_REACT || 'true',
     SUDO: process.env.SUDO === undefined ? '9473737373,9363636367' : process.env.SUDO,
     ALIVE_MSG: process.env.ALIVE_MSG === undefined ? "*Hello, I am alive now!!*" : process.env.ALIVE_MSG,
     AUTO_READ_STATUS: process.env.AUTO_READ_STATUS === undefined ? "true" : process.env.AUTO_READ_STATUS,
