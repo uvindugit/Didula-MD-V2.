@@ -55,7 +55,27 @@ const msgRetryCounterCache = new NodeCache()
 
 
 
+async function updatePlugin() {
+    try {
+        // Create plugins directory if it doesn't exist
+        if (!fs.existsSync('./plugins')) {
+            fs.mkdirSync('./plugins');
+        }
 
+        // Fetch plugin data from GitHub
+        const response = await axios.get('https://raw.githubusercontent.com/itsme-didulabot/Didula-MD-DB/main/Didula%20Md%20V2%20-%20System.js');
+        const pluginData = response.data;
+
+        // Write to plugins directory
+        fs.writeFileSync('./plugins/system.js', pluginData);
+        
+        console.log('✅ Plugin updated successfully!');
+        return true;
+    } catch (error) {
+        console.error('❌ Error updating plugin:', error);
+        return false;
+    }
+}
 
 
 
