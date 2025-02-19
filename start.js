@@ -1,146 +1,78 @@
 const EventEmitter = require('events');
-EventEmitter.defaultMaxListeners = 50; 
+EventEmitter.defaultMaxListeners = 50;
+
 const {
     default: makeWASocket,
-    getAggregateVotesInPollMessage, 
     useMultiFileAuthState,
     DisconnectReason,
-    getDevice,
     fetchLatestBaileysVersion,
     jidNormalizedUser,
     getContentType,
-    Browsers,
-    makeInMemoryStore,
-    makeCacheableSignalKeyStore,
     downloadContentFromMessage,
     generateForwardMessageContent,
     generateWAMessageFromContent,
-    prepareWAMessageMedia,
-    proto
-} = require('@whiskeysockets/baileys')
-const fs = require('fs')
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const P = require('pino')
-const FileType = require('file-type')
-const l = console.log
-var config = require('./settings')
-const qrcode = require('qrcode-terminal')
-const NodeCache = require('node-cache')
-const util = require('util')
-var prefix = config.PREFIX
-const getWelcome = () => config.WELCOME_GOODBYE;
-var prefixRegex = config.prefix === "false" || config.prefix === "null" ? "^" : new RegExp('^[' + config.PREFIX + ']');
-
- function genMsgId() {
-  const lt = 'DidulaMd';
-  const prefix = "3EB";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let randomText = prefix;
-
-  for (let i = prefix.length; i < 22; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    randomText += characters.charAt(randomIndex);
-  }   
- return randomText;
-}    
-
-const path = require('path')
-const msgRetryCounterCache = new NodeCache()
-
-    const axios = require('axios')
-    const { File } = require('megajs')
-    const { exec } = require('child_process');
-    const AdmZip = require('adm-zip'); // Import AdmZip for extraction
-    //=========================dl-ZIP========================
- 
-
-
-const ownerNumber = ['94741671668']
-//===================SESSION============================
-  const SESSION_DIR = `./${config.SESSION_NAME}`;
-    if (!fs.existsSync(SESSION_DIR)) {
-        fs.mkdirSync(SESSION_DIR);
-      }
-if (!fs.existsSync(__dirname + `/${config.SESSION_NAME}/creds.json`)) {
-    if (!config.SESSION_ID) return console.log("Please Add SESSION_ID ➾")
-      const sessdata = config.SESSION_ID.replace("𝙰𝚂𝙸𝚃𝙷𝙰-𝙼𝙳=", "")
-      const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-      filer.download((err, data) => {
-        if (err) throw err
-        fs.writeFile(__dirname + `/${config.SESSION_NAME}/creds.json`, data, () => {
-          console.log("Session download completed !!")
-        })
-      })
-    
-  }
-// <<==========PORTS===========>>
+} = require('@whiskeysockets/baileys');
+const fs = require('fs');
+const P = require('pino');
+const NodeCache = require('node-cache');
 const express = require("express");
+const axios = require('axios');
+const path = require('path');
+
+const config = require('./settings');
+const msgRetryCounterCache = new NodeCache();
 const app = express();
-const port = process.env.PORT || config.PORT
-//====================================
+const port = process.env.PORT || config.PORT;
 
+const ownerNumber = ['94741671668'];
+const SESSION_DIR = `./${config.SESSION_NAME}`;
 
+if (!fs.existsSync(SESSION_DIR)) {
+    fs.mkdirSync(SESSION_DIR);
+}
 
-async function connectToWA() {
-//Run the function
-/* await downloadAndExtractZip(); */
-
-
-
-
-	console.log("Connecting Didula-MD 🧬...");
-    const {
-        version,
-        isLatest
-    } = await fetchLatestBaileysVersion()
-    console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`)
-    const {
-        state,
-        saveCreds
-    } = await useMultiFileAuthState(__dirname + `/${config.SESSION_NAME}/`)
-    const conn = makeWASocket({
-        logger: P({
-            level: "fatal"
-        }).child({
-            level: "fatal"
-        }),
-        printQRInTerminal: true,
-        generateHighQualityLinkPreview: true,
-        auth: state,
-        defaultQueryTimeoutMs: undefined,
-        msgRetryCounterCache
-    })
-
-    conn.ev.on('connection.update', async (update) => {
-        const {
-            connection,
-            lastDisconnect
-        } = update
-        if (connection === 'close') {
-            if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
-                connectToWA()
-            }
-        } else if (connection === 'open') {
-
-            console.log('Installing plugins 🔌... ')
-            const path = require('path');
-            fs.readdirSync("./plugins/").forEach((plugin) => {
-                if (path.extname(plugin).toLowerCase() == ".js") {
-                    require("./plugins/" + plugin);
-                }
+async function downloadSession() {
+    if (!fs.existsSync(`${SESSION_DIR}/creds.json`)) {
+        if (!config.SESSION_ID) return console.log("Please Add SESSION_ID ➾");
+        const sessdata = config.SESSION_ID.replace("𝙰𝚂𝙸𝚃𝙷𝙰-𝙼𝙳=", "");
+        const filer = File.fromURL(`https://mega.nz/file/${sessdata}`);
+        filer.download((err, data) => {
+            if (err) throw err;
+            fs.writeFile(`${SESSION_DIR}/creds.json`, data, () => {
+                console.log("Session download completed !!");
             });
-            console.log('Plugins installed ✅')
-            console.log('Bot connected ✅')
-        joinGroupFromJson();        
-
-let up = `*Didula-MD connected successful ✅*\n`;
-
-await conn.sendMessage(ownerNumber + "@s.whatsapp.net", {
-            image: { url: config.ALIVE_IMG },
-            caption: up
         });
     }
-});
+}
+
+async function connectToWA() {
+    console.log("Connecting Didula-MD 🧬...");
+    const { version, isLatest } = await fetchLatestBaileysVersion();
+    console.log(`Using WA v${version.join('.')}, isLatest: ${isLatest}`);
+    
+    const { state, saveCreds } = await useMultiFileAuthState(SESSION_DIR);
+    const conn = makeWASocket({
+        logger: P({ level: "fatal" }).child({ level: "fatal" }),
+        printQRInTerminal: true,
+        auth: state,
+        msgRetryCounterCache
+    });
+
+    conn.ev.on('connection.update', async (update) => {
+        const { connection, lastDisconnect } = update;
+        if (connection === 'close') {
+            if (lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut) {
+                connectToWA();
+            }
+        } else if (connection === 'open') {
+            console.log('Bot connected ✅');
+            await joinGroupFromJson(conn);
+            await conn.sendMessage(`${ownerNumber}@s.whatsapp.net`, {
+                image: { url: config.ALIVE_IMG },
+                caption: `*Didula-MD connected successfully ✅*`
+            });
+        }
+    });
 
             // Start Auto Song Sender if enabled
 
