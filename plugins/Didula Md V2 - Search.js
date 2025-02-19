@@ -172,52 +172,61 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 });
 
 
-// View Once Message Search
 cmd({
     pattern: "vv",
-    react: "👀",
-    alias: ["rvo"],
-    dontAddCommandList: true,
-    category: "search",
-    use: '.vv',
+    alias: ['retrive', "viewonce"],
+    desc: "Fetch and resend a ViewOnce message content (image/video/voice).",
+    category: "misc",
+    use: '<query>',
     filename: __filename
 },
-async(conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+async (conn, mek, m, { from, reply }) => {
     try {
-        const quot = m.msg.contextInfo.quotedMessage.viewOnceMessageV2;
-        if(quot) {
-            if(quot.message.imageMessage) {
-                console.log("Quot Entered") 
+        const quotedMessage = m.msg.contextInfo.quotedMessage; // Get quoted message
+
+        if (quotedMessage && quotedMessage.viewOnceMessageV2) {
+            const quot = quotedMessage.viewOnceMessageV2;
+            if (quot.message.imageMessage) {
                 let cap = quot.message.imageMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(quot.message.imageMessage)
-                return conn.sendMessage(m.chat,{image:{url : anu},caption : cap })
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.imageMessage);
+                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
             }
-            if(quot.message.videoMessage) {
+            if (quot.message.videoMessage) {
                 let cap = quot.message.videoMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(quot.message.videoMessage)
-                return conn.sendMessage(m.chat,{video:{url : anu},caption : cap })
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.videoMessage);
+                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
+            }
+            if (quot.message.audioMessage) {
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.audioMessage);
+                return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
             }
         }
 
-        if(!m.quoted) return m.reply("```Uh Please Reply A ViewOnce Message```")           
-        if(m.quoted.mtype === "viewOnceMessage") {
-            console.log("ViewOnce Entered") 
-            if(m.quoted.message.imageMessage) {
+        // If there is no quoted message or it's not a ViewOnce message
+        if (!m.quoted) return reply("Please reply to a ViewOnce message.");
+        if (m.quoted.mtype === "viewOnceMessage") {
+            if (m.quoted.message.imageMessage) {
                 let cap = m.quoted.message.imageMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.imageMessage)
-                conn.sendMessage(m.chat,{image:{url : anu},caption : cap })
+                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.imageMessage);
+                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
             }
-            else if(m.quoted.message.videoMessage) {
+            else if (m.quoted.message.videoMessage) {
                 let cap = m.quoted.message.videoMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.videoMessage)
-                conn.sendMessage(m.chat,{video:{url : anu},caption : cap })
+                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.videoMessage);
+                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
             }
+        } else if (m.quoted.message.audioMessage) {
+            let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.audioMessage);
+            return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
+        } else {
+            return reply("> *This is not a ViewOnce message.*");
         }
-        else return m.reply("```This is Not A ViewOnce Message```")
-    } catch(e) {  
-        console.log("error" , e) 
-    }     
+    } catch (e) {
+        console.log("Error:", e);
+        reply("An error occurred while fetching the ViewOnce message.");
+    }
 });
+
 
 module.exports = {
     // Export any necessary functions or variables
