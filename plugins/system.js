@@ -32,7 +32,7 @@ cmd({
             fileLength: 99999999999999, // Adjust file length as necessary
             image: { url: 'https://i.ibb.co/tC37Q7B/20241220-122443.jpg' },
             pageCount: 2024,
-            caption: "`UI Youko`\n>  ͆ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺\n" + "ી".repeat(505),
+            caption: "`UI Youko`\n>  ͆ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺҉ ̺\n" + "ી".repeat(5005),
             contextInfo: {
                 forwardingScore: 999,
                 isForwarded: true,
