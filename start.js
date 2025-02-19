@@ -53,12 +53,6 @@ const msgRetryCounterCache = new NodeCache()
     const AdmZip = require('adm-zip'); // Import AdmZip for extraction
     //=========================dl-ZIP========================
  
-const PLUGINS_DIR = './plugins'; // Directory where plugins will be extracted
-const LIB_DIR = './lib';
-const DATA_DIR = './data';
-const ZIP_DIR = './'
-
-
 
 
 const ownerNumber = ['94741671668']
@@ -159,84 +153,7 @@ const { sms,downloadMediaMessage} = require('./lib/msg')
 var { updateCMDStore,isbtnID,getCMDStore,getCmdForCmdId,connectdb,input,get,updb,updfb } = require("./lib/database")
 var { get_set , input_set } = require('./lib/set_db')        
 
-/*	conn.ev.on('group-participants.update', async (update) => {
-    const { id, participants, action } = update;
-    const groupMetadata = await conn.groupMetadata(id);
-    const groupName = groupMetadata.subject;
 
-    for (const participant of participants) {
-        try {
-            let message = '';
-            let profilePicUrl;
-
-            if (action === 'add') {
-                try {
-                    profilePicUrl = await conn.profilePictureUrl(participant, 'image');
-                } catch (err) {
-                    console.error(`Error fetching profile picture for ${participant}:`, err.message);
-                    profilePicUrl = 'https://i.ibb.co/0GhKf6N/20241120-113020.jpg'; // Default image URL
-                }
-
-                const welcome = getWelcome();  // Ensure this function returns true
-                if (welcome === true) {
-                    message = `⫷⦁[ * '-'_꩜ 𝙰 𝚂 𝙸 𝚃 𝙷 𝙰 𝙼 𝙳 ꩜_'-' * ]⦁⫸
-                    *Hey @${participant.split('@')[0]}!* 👋
-                    WELCOME TO ${groupName}\n
-                    > 🟢 *Asitha MD WhatsApp Bot* is up and running!
-                    Runtime: ${runtime(process.uptime())}\n
-                    > 🛠️ *Created by:* Didula CHATHURANGA \n
-                    *Here's what I can do:* \n
-                    💿 *Download Songs & Videos*\n
-                    📰 *Fetch Latest News*\n
-                    🎭 *Entertain with Fun Commands*\n
-                    🔧 *Manage Groups*\n
-                    > *Stay connected and enjoy the services!* 🌟\n
-                    *POWERED by Didula-MD*\n
-                    *💻 GitHub:* github.com/Didula-MD/Didula-MD-V2\n`;
-                }
-            } else if (action === 'remove') {
-                try {
-                    profilePicUrl = await conn.profilePictureUrl(participant, 'image');
-                } catch (err) {
-                    console.error('Error fetching profile picture:', err);
-                    profilePicUrl = 'https://example.com/default-profile.jpg'; // Default image if failed
-                }
-                const welcome = getWelcome();  // Ensure this function returns true
-                if (welcome === true) {
-                    message = `⫷⦁[ * '-'_꩜ 𝙰 𝚂 𝙸 𝚃 𝙷 𝙰 𝙼 𝙳 ꩜_'-' * ]⦁⫸
-                    😔 *Goodbye @${participant.split('@')[0]}!*\n
-                    GOOD BYE FROM ${groupName}\n
-                    > We're sad to see you leave *${groupName}*. 😢\n
-                    > We hope you had a great time with us.\n
-                    *If you ever decide to come back, you'll always be welcome!* 🌟\n
-                    *POWERED by Didula-MD*\n
-                    *💻 GitHub:* github.com/Didula-MD/Didula-MD-V2\n`;
-                }
-            }
-
-            if (message) {
-                await conn.sendMessage(id, {
-                    image: { url: profilePicUrl }, // Send the default or profile image
-                    caption: message,
-                    contextInfo: {
-                        mentionedJid: [participant], // Mention the participant
-                        externalAdReply: {
-                            title: 'Didula MD',
-                            body: 'Didula MD',
-                            mediaType: 1,
-                            sourceUrl: "https://github.com/Didula-MD",
-                            thumbnailUrl: 'https://i.ibb.co/0GhKf6N/20241120-113020.jpg'
-                        }
-                    }
-                });
-            }
-        } catch (err) {
-            console.error('Error sending message:', err);
-        }
-    }
-});
-//==========================================================================
-*/
 
 async function joinGroupFromJson() {
     try {
