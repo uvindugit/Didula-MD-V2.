@@ -1,6 +1,13 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F01&lines=Didula+MD+V2)](https://git.io/typing-svg)
 
 
+<p align="center">
+<a href="https://github.com/ASITHA-MD/BOT-NEW">
+    <img src=https://i.ibb.co/tC37Q7B/20241220-122443.jpg"  width="700px">
+</a>
+<hr>
+
+
 
 | Feature | Description |
 | --- | --- |
