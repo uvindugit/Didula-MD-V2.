@@ -1,5 +1,4 @@
-# Didula MD V2
-
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=F01&lines=Didula+MD+V2)](https://git.io/typing-svg)
 
 
 
