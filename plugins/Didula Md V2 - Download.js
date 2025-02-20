@@ -10,6 +10,58 @@ const yts = require('yt-search'); // For YouTube search
 const cheerio = require('cheerio'); // Import cheerio for HTML parsing
 
 
+const baseUrl = 'https://vajira-official-api.vercel.app'
+
+cmd({
+    pattern: "fb",
+    alias: ["facebook"],
+    desc: "download fb videos",
+    category: "download",
+    react: "🔎",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("Please provide a valid Facebook video URL.")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/download/fbdown?url=${q}`)
+        reply("*Downloading...*")
+        //send video (hd,sd)
+        await conn.sendMessage(from, { video: { url: data.result.hd }, mimetype: "video/mp4", caption: `*Facebook Video Download*\n\nTitle: ${data.result.title}\nDescription: ${data.result.desc}\n\n ᴩʀᴏᴊᴇᴄᴛꜱ ᴏꜰ ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.result.sd }, mimetype: "video/mp4", caption: `*Facebook Video Download*\n\nTitle: ${data.result.title}\nDescription: ${data.result.desc}\n\n ᴩʀᴏᴊᴇᴄᴛꜱ ᴏꜰ ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ` }, { quoted: mek })  
+    } catch (e) {
+        console.log(e)
+        reply(`Sorry, an error occurred while processing your request. Please try again later.`)
+    }
+})
+
+//tiktok downloader
+cmd({
+    pattern: "tiktok",
+    alias: ["tt"],
+    desc: "download tt videos",
+    category: "download",
+    react: "🔎",
+    filename: __filename
+},
+async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        if (!q && !q.startsWith("https://")) return reply("Please provide a valid TikTok video URL.")
+        //fetch data from api  
+        let data = await fetchJson(`${baseUrl}/download/tiktokdl?url=${q}`)
+        reply("*Downloading...*")
+        //send video (wm,nwm)
+        await conn.sendMessage(from, { video: { url: data.result.nowm }, mimetype: "video/mp4", caption: `*TikTok Video Download*\n\nTitle: ${data.result.title}\nCaption: ${data.result.caption}\n\n ᴩʀᴏᴊᴇᴄᴛꜱ ᴏꜰ ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ`, thumbnail: await getBuffer(data.result.thumbnail) }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.result.wm }, mimetype: "video/mp4", caption: `*TikTok Video Download*\n\nTitle: ${data.result.title}\nCaption: ${data.result.caption}\n\n ᴩʀᴏᴊᴇᴄᴛꜱ ᴏꜰ ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ`, thumbnail: await getBuffer(data.result.thumbnail) }, { quoted: mek })  
+        //send audio    
+        await conn.sendMessage(from, { audio: { url: data.result.mp3 }, mimetype: "audio/mpeg" }, { quoted: mek })  
+    } catch (e) {
+        console.log(e)
+        reply(`Sorry, an error occurred while processing your request. Please try again later.`)
+    }
+})
+
+
 
 cmd({
     pattern: "update",
