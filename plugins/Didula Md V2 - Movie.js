@@ -4,10 +4,10 @@ const { cmd } = require("../lib/command");
 
 
 cmd({
-    pattern: "sinhala",
+    pattern: "movie",
     desc: "Search and show top Sinhala subtitles for films.",
     react: "🎬",
-    category: "movie",
+    category: "download",
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
