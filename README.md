@@ -3,9 +3,12 @@
 
 
 
-    <img src=https://i.ibb.co/tC37Q7B/20241220-122443.jpg"  width="700px">
-
-
+    <p align="center">
+<a href="https://github.com/ASITHA-MD/BOT-NEW">
+    <img src=https://i.ibb.co/0GhKf6N/20241120-113020.jpg"  width="700px">
+</a>
+<hr>
+ <p align="center">
 
 
 | Feature | Description |
