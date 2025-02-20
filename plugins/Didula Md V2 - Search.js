@@ -10,6 +10,71 @@ const yts = require('yt-search'); // Make sure to import the yts library
 
 
 cmd({
+    pattern: "githubstalk",
+    desc: "Fetch detailed GitHub user profile including profile picture.",
+    category: "search",
+    react: "🖥️",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        const username = args[0];
+        if (!username) {
+            return reply("Please provide a GitHub username.");
+        }
+
+        const apiUrl = `https://api.github.com/users/${username}`;
+        const response = await axios.get(apiUrl);
+        const data = response.data;
+
+        let userInfo = `     🔍_*DIDULA-MD-V2 GIT STALK*_🔎
+        
+👤 *Username*: ${data.name || data.login}
+🔗 *Github Url*:(${data.html_url})
+📝 *Bio*: ${data.bio || 'Not available'}
+🏙️ *Location*: ${data.location || 'Unknown'}
+📊 *Public Repos*: ${data.public_repos}
+👥 *Followers*: ${data.followers} | Following: ${data.following}
+📅 *Created At*: ${new Date(data.created_at).toDateString()}
+🔭 *Public Gists*: ${data.public_gists}
+
+> *ᴩʀᴏᴊᴇᴄᴛꜱ ᴏꜰ ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ*
+`;
+
+         // Sending the image with caption
+          const sentMsg = await conn.sendMessage(from, {
+
+
+          text: userInfo,
+          contextInfo: {
+
+          forwardingScore: 999,
+          isForwarded: true,
+          forwardedNewsletterMessageInfo: {
+          newsletterName: '◆─〈 ✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦ 〉─◆',
+          newsletterJid: "",
+          },
+          externalAdReply: {
+              title: `Didula-MD-V2 Github Information`,
+              body: `Can't Find The Information. You Can Try Another Way. Error Code 4043`,
+              thumbnailUrl: data.avatar_url,
+              sourceUrl: ``,
+              mediaType: 1,
+              renderLargerThumbnail: true
+              }
+                  }
+              }, { quoted: mek });
+    } catch (e) {
+        console.log(e);
+        reply(`єяяσя ƒєт¢нιηg ∂αтα: ${e.response ? e.response.data.message : e.message}`);
+    }
+});
+
+
+
+
+
+cmd({
     pattern: "ipinfo",
     desc: "Get information about an IP address",
     use: ".ipinfo <IP_address>",
