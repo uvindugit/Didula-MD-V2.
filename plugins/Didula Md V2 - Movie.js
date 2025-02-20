@@ -41,7 +41,7 @@ cmd({
         const topFilms = data.result.data.slice(0, 20);
         const filmsList = topFilms.map((film, index) => `${index + 1}. 🎬 *${film.title} (${film.year})*`).join("\n\n");
 
-        const msg = `🎥 *APEX Movie Sinhala Sub Search,*\n\n🔍 *Search Results for:* *${q}*\n\n${filmsList}\n\n> Reply with a number to Select movie.`;
+        const msg = `🎥 *Didula MD Movie Sinhala Sub Search,*\n\n🔍 *Search Results for:* *${q}*\n\n${filmsList}\n\n> Reply with a number to Select movie.`;
 
         const sentMsg = await conn.sendMessage(from, { text: msg }, { quoted: mek });
 
@@ -93,7 +93,7 @@ cmd({
                 let pp2 = quality2.replace("/u/", "/api/file/");
 
                 // Send movie details
-                let msg = `🎥 ᴀᴘᴇx ᴍᴏᴠɪᴇ ᴅᴏᴡɴʟᴏᴇʀ 🎥
+                let msg = `🎥 ᴅɪᴅᴜʟᴀ ᴍᴅ ᴍᴏᴠɪᴇ ᴅᴏᴡɴʟᴏᴇʀ 🎥
 
 *☘️ Title:* *${urll.result.data.title || 'N/A'}*
 *📆 Release:* *${urll.result.data.date || 'N/A'}*
@@ -103,9 +103,9 @@ cmd({
 
 \n> ඩවුන්ලෝඩ් Option පේන්නැත්නම් ආයිත් Reply කරන්න.🫠
 
-\n> *Powered by Apex MD* 🎥✨
+\n> *Powered by Didula MD* 🎥✨
 
-\n> *Powered by Kawdhitha Nirmal* 🧑‍💻✨
+\n> *Powered by Didula Rashmika* 🧑‍💻✨
 `;
 
                 // Send download options
@@ -121,8 +121,8 @@ cmd({
 │   🎬 *2.2* | 🎖️ *720p*   | 📦 *Size:${urll.result.data.dl_links[1]?.size}* 
 │   🎬 *2.3* | 🏆 *1080p* | 📦 *Size:${urll.result.data.dl_links[0]?.size}*  
 │  
-│ ✨ *Powered by Apex MD* 🎥  
-│ 💻 *Developed by Kawdhitha Nirmal*  
+│ ✨ *Powered by Didula MD* 🎥  
+│ 💻 *Developed by Didula Rashmika*  
 ╰━─━─━─≪✠≫─━─━─━╯
 `;
 
@@ -156,26 +156,26 @@ cmd({
                             await conn.sendMessage(from, {
                                 document: { url: pp2 },  // Link to the 480p video
                                 mimetype: "video/mp4",    // MIME type for video
-                                fileName: `🎬 ᴀᴘᴇx ᴍᴅ 🎬${urll.result.data.title}`, // Added prefix to the file name
-                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Apex MD* 🎥✨`
+                                fileName: `🎬 ᴅɪᴅᴜʟᴀ ᴍᴅ ᴍᴅ 🎬${urll.result.data.title}`, // Added prefix to the file name
+                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Didula MD* 🎥✨`
                             }, { quoted: mek });
                         } else if (messageType === '2.2') {
                             await conn.sendMessage(from, {
                                 document: { url: pp1 },  // Link to the 720p video
                                 mimetype: "video/mp4",    // MIME type for video
-                                fileName: `🎬 ᴀᴘᴇx ᴍᴅ 🎬${urll.result.data.title}`, // Added prefix to the file name
-                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Apex MD* 🎥✨`
+                                fileName: `🎬 ᴅɪᴅᴜʟᴀ ᴍᴅ ᴍᴅ 🎬${urll.result.data.title}`, // Added prefix to the file name
+                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Didula MD* 🎥✨`
                             }, { quoted: mek });
                         } else if (messageType === '2.3') {
                             await conn.sendMessage(from, {
                                 document: { url: pp },   // Link to the 1080p video
                                 mimetype: "video/mp4",   // MIME type for video
-                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Apex MD* 🎥✨`
+                                caption: `\n*🎬 Name:* ${urll.result.data.title}\n\n> *Powered by Didula MD* 🎥✨`
                             }, { quoted: mek });
                         } else if (messageType === '1.1') {
                             await conn.sendMessage(from, {
                                 image: { url: urll.result.data.images[0] }, // Send image from URL
-                                caption: `🎥 ᴀᴘᴇx ᴍᴏᴠɪᴇ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ 🎥
+                                caption: `🎥 ᴅɪᴅᴜʟᴀ ᴍᴅ ᴍᴏᴠɪᴇ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ 🎥
                                 
 *☘️ Title:* *${urll.result.data.title || 'N/A'}* 
 *📆 Release:* ${urll.result.data.date || 'N/A'}*
@@ -191,9 +191,9 @@ cmd({
 
 ${urll.result.data.description}
                                                        
-\n> *Powered by Apex MD* 🎥✨
+\n> *Powered by Didula MD* 🎥✨
 
-\n> *Powered by Kawdhitha Nirmal* 🧑‍💻✨`
+\n> *Powered by Didula Rashmika* 🧑‍💻✨`
                             }, { quoted: mek });
                         
                         } else if (messageType === '1.2') {
@@ -206,7 +206,7 @@ ${urll.result.data.description}
                             for (let imageUrl of urll.result.data.images) {
                                 await conn.sendMessage(from, {
                                     image: { url: imageUrl },
-                                    caption: `☘️ *𝗧ɪᴛ𝗟𝗘:* ${urll.result.data.title}\n\n> *Powered by Apex MD* 🎥✨\n\n> *Powered by Kawdhitha Nirmal* 🧑‍💻✨`
+                                    caption: `☘️ *𝗧ɪᴛ𝗟𝗘:* ${urll.result.data.title}\n\n> *Powered by Didula MD* 🎥✨\n\n> *Powered by Didula Rashmika* 🧑‍💻✨`
                                 });
                             }
                                                 
