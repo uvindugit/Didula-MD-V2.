@@ -2,22 +2,115 @@
   "name": "Didula-MD",
   "description": "Didula-MD has been designed to make things easier and fun while using WhatsApp. ❤️",
   "logo": "https://i.ibb.co/tC37Q7B/20241220-122443.jpg",
-  "keywords": ["didulamd", "bot", "whatsapp bot", "multi device", "didula-md"],
+  "keywords": [
+    "didulamd",
+    "bot",
+    "whatsapp bot",
+    "multi device",
+    "didula-md"
+  ],
   "success_url": "/",
-
   "env": {
     "SESSION_ID": {
-            "description": "Paste Your PRABATH-MD session",
-            "required": true,
-            "value": ""
-        }
+      "description": "Paste Your PRABATH-MD session",
+      "required": true,
+      "value": ""
     },
-         "buildpacks": [
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
-        }
-     ],
+    "PREFIX": {
+      "description": "Prefix for the bot commands",
+      "required": false,
+      "value": "."
+    },
+    "FOOTER": {
+      "description": "Footer for the bot messages",
+      "required": false,
+      "value": "*✦𝐃𝐢𝐝𝐮𝐥𝐚 𝐌𝐃 𝐕𝟐✦*"
+    },
+    "ALIVE_IMG": {
+      "description": "Image to be used for the 'alive' command",
+      "required": false,
+      "value": "https://files.catbox.moe/za6ytm.jpg"
+    },
+    "PORT": {
+      "description": "Port for the application to run on",
+      "required": false,
+      "value": "8000"
+    },
+    "HEART_REACT": {
+      "description": "Enable/Disable heart reaction",
+      "required": false,
+      "value": "false"
+    },
+    "SUDO": {
+      "description": "Comma-separated list of phone numbers for sudo users",
+      "required": false,
+      "value": "94741671668,94771820962"
+    },
+    "ALIVE_MSG": {
+      "description": "Message to be displayed for the 'alive' command",
+      "required": false,
+      "value": "*Hello, I am alive now!!*"
+    },
+    "AUTO_READ_STATUS": {
+      "description": "Enable/Disable automatic reading of status updates",
+      "required": false,
+      "value": "true"
+    },
+    "MODE": {
+      "description": "Mode of operation (public/private)",
+      "required": false,
+      "value": "public"
+    },
+    "ANTI_BAD": {
+      "description": "Enable/Disable anti-bad word filter",
+      "required": false,
+      "value": "false"
+    },
+    "ANTI_LINK": {
+      "description": "Enable/Disable anti-link filter",
+      "required": false,
+      "value": "false"
+    },
+    "ANTI_CALL": {
+      "description": "Enable/Disable anti-call feature",
+      "required": false,
+      "value": "false"
+    },
+    "ANTI_DELETE": {
+      "description": "Enable/Disable anti-delete feature",
+      "required": false,
+      "value": "false"
+    },
+    "ANTI_BOT": {
+      "description": "Enable/Disable anti-bot feature",
+      "required": false,
+      "value": "false"
+    },
+    "READ_CMD": {
+      "description": "Enable/Disable read command",
+      "required": false,
+      "value": "false"
+    },
+    "RECORDING": {
+      "description": "Enable/Disable recording feature",
+      "required": false,
+      "value": "false"
+    },
+    "AI_CHAT": {
+      "description": "Enable/Disable AI chat feature",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_SONG_SENDER": {
+      "description": "Enable/Disable automatic song sending feature",
+      "required": false,
+      "value": "false"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
   "stack": "heroku-24"
-
-
 }
